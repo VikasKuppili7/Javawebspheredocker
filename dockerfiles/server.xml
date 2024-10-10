@@ -1,0 +1,49 @@
+<server description="WebSphere Liberty Server">
+    <httpEndpoint id="defaultHttpEndpoint" host="*" httpPort="9080"  />
+    
+    <featureManager>
+        <!-- <feature>javaee-8.0</feature> -->
+        <!-- <feature>microProfile-3.0</feature> -->
+        <feature>servlet-4.0</feature> <!-- Add this line -->
+        <!-- <feature>ssl-1.0</feature> -->
+    </featureManager>
+
+    <!-- <application id="websphere-springboot-app" location="JavaWeb.war" type="war" /> -->
+
+    <application id="java-web-app" location="javawebapp.war" type="war">
+    <context-root>/test</context-root>
+</application>
+
+<logging 
+        traceSpecification="com.ibm.ws.webcontainer*=all:com.ibm.ws.classloading*=all:com.ibm.ws.app*=all"
+        consoleLogLevel="INFO"
+        logDirectory="${server.config.dir}/logs"
+        messageFileName="messages.log"
+        traceFileName="trace.log"
+        maxFileSize="20MB"
+        maxFiles="10"
+        traceFormat="BASIC"
+    />
+
+    <!-- Optional: Enable HTTP Access Logging for request tracking -->
+    <httpAccessLogging 
+        logDirectory="${server.config.dir}/logs/accessLogs"
+        fileName="http_access.log"
+        maxFileSize="20MB"
+        maxFiles="5"
+    />
+
+    <!-- SSL configuration -->
+   <!--  <keyStore id="defaultKeyStore" location="keystore.p12" password="password" type="PKCS12"/>
+    <ssl id="defaultSSL" keyStoreRef="defaultKeyStore" /> -->
+
+     <!-- <keyStore id="defaultKeyStore" 
+              location="${java.home}/lib/security/cacerts" 
+              password="changeit" 
+              type="JKS"/>
+
+    <ssl id="defaultSSL" keyStoreRef="defaultKeyStore" /> -->
+<!--       <keyStore id="defaultKeyStore" location="keystore.p12" password="mywebapp" type="PKCS12"/>
+    <ssl id="defaultSSL" keyStoreRef="defaultKeyStore" />
+ -->
+</server>
